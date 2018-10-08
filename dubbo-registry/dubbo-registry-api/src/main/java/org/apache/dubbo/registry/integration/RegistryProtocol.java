@@ -131,10 +131,11 @@ public class RegistryProtocol implements Protocol {
     public <T> Exporter<T> export(final Invoker<T> originInvoker) throws RpcException {
         //export invoker
         final ExporterChangeableWrapper<T> exporter = doLocalExport(originInvoker);
-
+        // 获取真实注册中心的URL
         URL registryUrl = getRegistryUrl(originInvoker);
 
         //registry provider
+        // 根据注册中心URL，从注册中心工厂中获取指定的注册中心实现类：zookeeper注册中心的实现类为：ZookeeperRegistry
         final Registry registry = getRegistry(originInvoker);
         final URL registeredProviderUrl = getRegisteredProviderUrl(originInvoker);
 
